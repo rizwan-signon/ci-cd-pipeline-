@@ -1,0 +1,23 @@
+# LOCAL DEVELOPMENT
+# Builds images from source on your machine.
+# Run:  docker compose up --build
+version: "3.8"
+
+services:
+  be:
+    build: ./be
+    container_name: practice-be
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+    restart: unless-stopped
+
+  fe:
+    build: ./fe
+    container_name: practice-fe
+    ports:
+      - "80:80"
+    depends_on:
+      - be
+    restart: unless-stopped

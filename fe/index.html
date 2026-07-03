@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Practice CI/CD Project</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; }
+    pre { background: #f4f4f4; padding: 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Practice CI/CD Project</h1>
+  <p>This page (frontend container) calls the backend container's API:</p>
+  <pre id="output">Loading...</pre>
+
+  <script>
+    fetch('/api/hello')
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('output').textContent = JSON.stringify(d, null, 2);
+      })
+      .catch(e => {
+        document.getElementById('output').textContent = 'Error calling backend: ' + e;
+      });
+  </script>
+</body>
+</html>

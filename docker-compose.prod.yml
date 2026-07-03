@@ -1,0 +1,21 @@
+# PRODUCTION / VM DEPLOYMENT
+# Pulls pre-built images from Docker Hub (pushed there by GitHub Actions).
+# This is the file the CI/CD pipeline copies to the VM and runs.
+version: "3.8"
+
+services:
+  be:
+    image: ${DOCKERHUB_USERNAME}/practice-be:latest
+    container_name: practice-be
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  fe:
+    image: ${DOCKERHUB_USERNAME}/practice-fe:latest
+    container_name: practice-fe
+    ports:
+      - "80:80"
+    depends_on:
+      - be
+    restart: unless-stopped
